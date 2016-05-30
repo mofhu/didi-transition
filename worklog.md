@@ -17,3 +17,10 @@ Training set: 20160101-20160121
 Test set: 20160122, 24, 26, 28, 30; (time 46, 58, 70, 82, 94, 106, 118, 130, 142)
 
 最终由于时间不够(deadline 11am), 只提交了 all 1 version.
+
+继续用 pandas 洗数据:
+
+- 先把 Order data 整理为 count data (sort by districts and time slices) `clean-data.ipynb` and `clean-order-data.py`
+- 用 `cat *.tsv > NaN.csv` 整理为单个 csv 文件
+- 再进一步整理为 average 时, 到了限时. 不确定提交的最终版本是 all 2 还是 all 10(10 is all average).
+
