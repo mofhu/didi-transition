@@ -42,7 +42,7 @@ def process(file_name, output_file_name):
     # output.to_csv(output_file_name)
 
 def main():
-    order_data_folder = 'data/season_1/test_set_1/order_data/'
+    order_data_folder = 'data/season_1/training_data/order_data/'
     import os
     for day in os.listdir(order_data_folder):
         if '2016' in day:

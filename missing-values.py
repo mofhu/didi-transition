@@ -40,7 +40,8 @@ def process(file_name, output_file_name):
     # ignore index and dist_hash
 
 def main():
-    order_data_folder = 'data/season_1/training_data/order_data/groupby/'
+    # order_data_folder = 'data/season_1/training_data/order_data/groupby/'
+    order_data_folder = 'data/season_1/test_set_1/order_data/groupby/'
     import os
     for day in os.listdir(order_data_folder):
         if '2016' in day and 'all' not in day:
