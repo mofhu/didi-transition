@@ -31,7 +31,7 @@ def process(file_name, output_file_name):
     # SQL-like join (left join)
 
     combined = combined.fillna(value=0)
-    combined["date"] = "-".join(re.findall("\d+", file_name)[1:])
+    combined["date"] = "-".join(re.findall("\d+", file_name)[2:])
 
     print(output_file_name)
     combined.to_csv(output_file_name, index=False, columns=['start_district_num','time_slice',
