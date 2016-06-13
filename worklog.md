@@ -128,4 +128,17 @@ demand/supply 可能都相对好处理, 但微小的波动就会引起 gap 的�
 
 ### CV 集打分脚本
 
+迅速实现了整合到 sklearn 的一个打分函数 (commit `f45fea3`). 
+
 ### 预测算法
+
+全1预测(baseline) @ 0612
+
+0613 outline
+
+- split test and training set
+- try easy ML algorithms (MAPE score)
+- fast submission
+- plot predict vs real y
+
+0613 submission: average gap, but no 0->1 modification
