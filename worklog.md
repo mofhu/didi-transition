@@ -142,3 +142,8 @@ demand/supply 可能都相对好处理, 但微小的波动就会引起 gap 的�
 - plot predict vs real y
 
 0613 submission: average gap, but no 0->1 modification
+
+### split training set and CV/test set locally
+
+- split training CV set: pandas .loc and isin() work well (`split-sets.ipynb`)
+- baseline on cv days: all 1 is 0.347 (online baseline 0.353)
