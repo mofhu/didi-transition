@@ -174,3 +174,34 @@ demand/supply 可能都相对好处理, 但微小的波动就会引起 gap 的�
 - 先人工预测看看感觉, 是否能有效估计 QC
 - grid search 等方法分开模型预测 (类似 NB) 重点是要用 MAPE 作为评估指标
 - cv result
+
+#### 人工预测 & 研究趋势
+
+dist51:
+
+time slice 94 很有意思: 波动极大; 相对来说 succeed 比较稳定, order 则不那么稳定; 
+
+整体只用 gap_10 最小二乘 基本上在 y = x 附近
+
+初步测试 简单线性拟合 (min R2) 后的结果与 baseline 比较: 感觉很有前景
+
+~~~
+time_slice 46: train 1.1, cv 0.77
+time_slice 46: baseline 0.88, 0.97
+time_slice 58: train 0.51, cv 0.29
+time_slice 58: baseline 0.84, 0.82
+time_slice 70: train 0.23, cv 0.54
+time_slice 70: baseline 0.89, 0.93
+time_slice 82: train 0.25, cv 0.42
+time_slice 82: baseline 0.94, 0.96
+time_slice 94: train 1.4, cv 0.56
+time_slice 94: baseline 0.96, 0.99
+time_slice 106: train 0.29, cv 0.72
+time_slice 106: baseline 0.99, 0.98
+time_slice 118: train 0.28, cv 0.47
+time_slice 118: baseline 0.95, 0.97
+time_slice 130: train 0.29, cv 0.23
+time_slice 130: baseline 0.99, 1.0
+time_slice 142: train 0.39, cv 1.6
+time_slice 142: baseline 0.97, 0.95
+~~~
