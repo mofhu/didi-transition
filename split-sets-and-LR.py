@@ -3,15 +3,8 @@
 
 # In[45]:
 
-
 import pandas as pd
 
-# In[46]:
-
-import matplotlib.pyplot as plt
-
-
-# In[47]:
 from sklearn.metrics.scorer import make_scorer
 import math
 
@@ -29,21 +22,16 @@ def MAPE_scorer(y, y_pred):
         return 0
 
 my_scorer = make_scorer(MAPE_scorer)
-
-
-# In[10]:
-
 # y = df['gap'][:21*66*144]
 # MAPE_scorer(y, [1 for i in range(0, 21*66*144)])
 
 
-# In[141]:
 def cal_dist(dist):
+    global cv_pred_all, cv_real_all
     # split training, CV, test set
     df = pd.read_csv("data/season_1/features/"+ str(dist)+".csv")
 
     df["date"] = df["date"].apply(lambda x: pd.to_datetime(x, errors='coerce'))
-
 
     training = df.loc[(df.date < '2016-01-17') | (df.date == '2016-01-18')]
 
@@ -62,8 +50,6 @@ def cal_dist(dist):
 
 
     # In[126]:
-
-
     def modifier(y_pred):
         # print(y_pred)
         for i in range(len(y_pred)):
@@ -72,8 +58,6 @@ def cal_dist(dist):
         #print(y_pred)
         return y_pred
     #modifier(list(y_training))
-
-    # In[202]:
 
     from sklearn import linear_model
     y_test_all = []
@@ -107,42 +91,37 @@ def cal_dist(dist):
         MAPE_cv = MAPE_scorer(y_cv, modifier(clf.predict(X_cv)))
         MAPE_1_train = MAPE_scorer(y_training, [1 for x in range(len(y_training))])
         MAPE_1_cv = MAPE_scorer(y_cv, [1 for x in range(len(y_cv))])
-        if MAPE_train > MAPE_1_train or MAPE_cv > MAPE_1_cv:
+        """if MAPE_train > MAPE_1_train or MAPE_cv > MAPE_1_cv:
             print('dist {}, time_slice {}: train {:.2}, cv {:.2}'.format(dist, time,
                 MAPE_train, MAPE_cv))
             print('dist {}, time_slice {}: baseline {:.2}, {:.2}'.format(dist, time,
                 MAPE_1_train ,
                 MAPE_1_cv ))
-        # print(clf.predict(X_test))
-        if MAPE_cv > MAPE_1_cv:
+                """
+        print(MAPE_cv, MAPE_1_cv)
+        if MAPE_train >= MAPE_1_train:
+            y_cv_pred = [1 for x in range(len(y_cv))]
             y_test = [1 for x in range(X_test.shape[0])]
         else:
             y_test = modifier(clf.predict(X_test))
+            y_cv_pred = modifier(clf.predict(X_cv))
 
         #print(y_test)
         #print(modifier(y_test))
+        cv_real_all += list(y_cv)
+        cv_pred_all += list(y_cv_pred)
         y_test_all += list(y_test)
-
-
-    # In[190]:
-
-
-    # In[199]:
 
     test = test.sort_values(by=['time_slice','date'])
     test['y'] = y_test_all
 
+    # test[['start_district_num','date','time_slice','y']].to_csv('pred' + str(dist) + '.csv')
 
-    # In[200]:
-
-    test[['start_district_num','date','time_slice','y']]
-
-
-    # In[204]:
-
-    test[['start_district_num','date','time_slice','y']].to_csv('pred' + str(dist) + '.csv')
-
-
+cv_real_all = []
+cv_pred_all = []
 for dist in range(1, 67):
     cal_dist(dist)
-
+    #print(cv_real_all, cv_pred_all)
+    print(len(cv_real_all))
+print(MAPE_scorer(cv_real_all, cv_pred_all))
+print(MAPE_scorer(cv_real_all, [1 for i in range(len(cv_real_all))]))

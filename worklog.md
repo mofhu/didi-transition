@@ -242,3 +242,11 @@ time_slice 142: baseline 0.97, 0.95
 选择了简单策略:
 
 - 在 cv error > all 1 error时, 用 all 1 替代 拟合
+
+整体 MAPE(CV set): 
+
+0.25; all 1 0.347 但问题在于 预测时已经使用了 cv 集, 有过拟合的可能.
+
+如果只用测试集: 0.385; all 1 0.347 与实际提交效果相当.
+
+只用测试集 + train error: 0.351
