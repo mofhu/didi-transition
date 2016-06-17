@@ -210,7 +210,7 @@ time_slice 142: baseline 0.97, 0.95
 
 很重要, 但是实现起来比较困难. 可能 17 日来不及.
 
-先写一个简单的 modifier 把已有的预测稍修改: 如 pred<0 则改为 1. 
+先写一个简单的 modifier 把已有的预测稍修改: 如 pred < 0 则改为 1. 
 
 修改后, 略有提升
 
@@ -238,3 +238,7 @@ time_slice 142: baseline 0.97, 0.95
 增加一个 outlier detect 功能:
 
 打印出 train/cv > baseline (all 1) 的集合, 便于手工弥补
+
+选择了简单策略:
+
+- 在 cv error > all 1 error时, 用 all 1 替代 拟合
