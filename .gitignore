@@ -1,5 +1,7 @@
 # Repo specific setting
 data/
+plot/
+pred/
 .DS_store
 
 # Byte-compiled / optimized / DLL files
