@@ -205,3 +205,36 @@ time_slice 130: baseline 0.99, 1.0
 time_slice 142: train 0.39, cv 1.6
 time_slice 142: baseline 0.97, 0.95
 ~~~
+
+#### custom scorer in linear reg
+
+很重要, 但是实现起来比较困难. 可能 17 日来不及.
+
+先写一个简单的 modifier 把已有的预测稍修改: 如 pred<0 则改为 1. 
+
+修改后, 略有提升
+
+~~~
+time_slice 46: train 0.9, cv 0.77
+time_slice 46: baseline 0.88, 0.97
+time_slice 58: train 0.51, cv 0.29
+time_slice 58: baseline 0.84, 0.82
+time_slice 70: train 0.23, cv 0.54
+time_slice 70: baseline 0.89, 0.93
+time_slice 82: train 0.25, cv 0.42
+time_slice 82: baseline 0.94, 0.96
+time_slice 94: train 1.4, cv 0.56
+time_slice 94: baseline 0.96, 0.99
+time_slice 106: train 0.29, cv 0.72
+time_slice 106: baseline 0.99, 0.98
+time_slice 118: train 0.28, cv 0.47
+time_slice 118: baseline 0.95, 0.97
+time_slice 130: train 0.29, cv 0.23
+time_slice 130: baseline 0.99, 1.0
+time_slice 142: train 0.39, cv 0.68
+time_slice 142: baseline 0.97, 0.95
+~~~
+
+增加一个 outlier detect 功能:
+
+打印出 train/cv > baseline (all 1) 的集合, 便于手工弥补
