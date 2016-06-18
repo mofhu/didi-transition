@@ -249,4 +249,26 @@ time_slice 142: baseline 0.97, 0.95
 
 如果只用测试集: 0.385; all 1 0.347 与实际提交效果相当.
 
-只用测试集 + train error: 0.351
+只用测试集 + train error: 0.351 
+
+想到三个 gap 可能共线性, 去掉 gap_30, gap_20: 只用一个变量 gap_10: 0.331
+
+
+### MAPE gradient descent
+
+写 gradient descent 算法测试
+
+`MAPE-gradient-descent.ipynb` & `MAPE-gradient-descent.py` 
+
+用平方差代替绝对值.
+
+似乎无法把 y<1 则 y=1, 这类分段函数加入线性拟合(斜率没法算). 改为在计算结果上 modify.
+
+final 0.316 (from y=x)
+
+0.295 (from y=0)
+
+可见起始值对局部最优影响很大. (因为这里可能不保证全局最优? 解空间比 没有除 y^2 的情况复杂一些.)
+
+提交作为最终解答, 希望能在 0.30 左右.
+

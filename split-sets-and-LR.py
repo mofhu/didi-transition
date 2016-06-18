@@ -67,20 +67,20 @@ def cal_dist(dist):
         test_ts = test.loc[test.time_slice == time]
         X_training = training_ts.as_matrix(columns=[
                                     # 'is_workday',
-                                    'gap_30min',
-                                    'gap_20min',
+                                    # 'gap_30min',
+                                    # 'gap_20min',
                                     'gap_10min'])
         y_training = training_ts.as_matrix(columns=['gap']).ravel()
         X_cv = cv_ts.as_matrix(columns=[
                                     # 'is_workday',
-                                    'gap_30min',
-                                    'gap_20min',
+                                    # 'gap_30min',
+                                    # 'gap_20min',
                                     'gap_10min'])
         y_cv = cv_ts.as_matrix(columns=['gap']).ravel()
         X_test = test_ts.as_matrix(columns=[
                                     # 'is_workday',
-                                    'gap_30min',
-                                    'gap_20min',
+                                    # 'gap_30min',
+                                    # 'gap_20min',
                                     'gap_10min'])
         clf = linear_model.LinearRegression()
         clf.fit(X_training, y_training)
